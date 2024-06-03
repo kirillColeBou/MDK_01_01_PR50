@@ -64,7 +64,7 @@ namespace Word_Тепляков.Context
             paraAddress.Range.InsertParagraphAfter();
             Paragraph paraCount = doc.Paragraphs.Add();
             paraCount.Range.Font.Size = 14;
-            paraCount.Range.Text = $"Всего жильцв: {AllOwners().Count}";
+            paraCount.Range.Text = $"Всего жильцов: {AllOwners().Count}";
             paraCount.Range.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphLeft;
             paraHeader.Range.ParagraphFormat.SpaceAfter = 0;
             paraCount.Range.InsertParagraphAfter();

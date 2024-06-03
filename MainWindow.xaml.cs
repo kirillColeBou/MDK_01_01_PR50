@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Word_Тепляков.Context;
 
 namespace Word_Тепляков
 {
@@ -23,6 +25,20 @@ namespace Word_Тепляков
         public MainWindow()
         {
             InitializeComponent();
+            LoadRooms();
+        }
+
+        public void LoadRooms()
+        {
+            for (int i = 1; i < 20; i++) parent.Children.Add(new Elements.Room(i));
+        }
+
+        private void Report(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Word Files (*.docx)|*.docx";
+            saveFileDialog.ShowDialog();
+            if(saveFileDialog.FileName != "") OwnerContext.Report(saveFileDialog.FileName);
         }
     }
 }
