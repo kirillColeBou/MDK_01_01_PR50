@@ -71,14 +71,17 @@ namespace Word_Тепляков.Context
             paraHeader.Range.ParagraphFormat.SpaceAfter = 0;
             paraCount.Range.InsertParagraphAfter();
             Paragraph paraTable = doc.Paragraphs.Add();
-            Table paymentsTable = doc.Tables.Add(paraTable.Range, AllOwners().Count + 1, 5);
+            Table paymentsTable = doc.Tables.Add(paraTable.Range, AllOwners().Count + 1, 6);
             paymentsTable.Borders.InsideLineStyle = paymentsTable.Borders.OutsideLineStyle = WdLineStyle.wdLineStyleSingle;
             paymentsTable.Range.Cells.VerticalAlignment = WdCellVerticalAlignment.wdCellAlignVerticalCenter;
             Cell("№", paymentsTable.Cell(1, 1).Range);
             Cell("Фамилия", paymentsTable.Cell(1, 2).Range);
             Cell("Имя", paymentsTable.Cell(1, 3).Range);
             Cell("Отчество", paymentsTable.Cell(1, 4).Range);
-            Cell("Изображение", paymentsTable.Cell(1, 5).Range);
+            Cell("Квартира", paymentsTable.Cell(1, 5).Range);
+            Cell("Изображение", paymentsTable.Cell(1, 6).Range);
+            int temp1 = -1;
+            int temp2 = -1;
             for (int i = 0; i < AllOwners().Count; i++)
             {
                 OwnerContext owner = AllOwners()[i];
@@ -86,7 +89,17 @@ namespace Word_Тепляков.Context
                 Cell(owner.LastName, paymentsTable.Cell(1 + 1 + i, 2).Range, WdParagraphAlignment.wdAlignParagraphLeft);
                 Cell(owner.FirstName, paymentsTable.Cell(1 + 1 + i, 3).Range, WdParagraphAlignment.wdAlignParagraphLeft);
                 Cell(owner.SurName, paymentsTable.Cell(1 + 1 + i, 4).Range, WdParagraphAlignment.wdAlignParagraphLeft);
-                Cell(owner.Img, paymentsTable.Cell(1 + 1 + i, 5).Range, WdParagraphAlignment.wdAlignParagraphCenter);
+                if (owner.NumberRoom != temp1)
+                {
+                    Cell(owner.NumberRoom.ToString(), paymentsTable.Cell(2 + i, 5).Range);
+                    temp2 = i + 2;
+                }
+                else 
+                { 
+                    paymentsTable.Cell(temp2, 5).Merge(paymentsTable.Cell(2 + i, 5)); 
+                }
+                temp1 = owner.NumberRoom;
+                Cell(owner.Img, paymentsTable.Cell(1 + 1 + i, 6).Range, WdParagraphAlignment.wdAlignParagraphCenter);
             }
             doc.SaveAs2(fileName);
             doc.Close();
