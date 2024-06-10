@@ -15,14 +15,16 @@ namespace Word_Тепляков.Models
         public string SurName { get; set; }
         public int NumberRoom { get; set; }
         public BitmapImage Img { get; set; }
+        public bool IsOwner { get; set; }
 
-        public Owner(string FirstName, string LastName, string SurName, int NumberRoom, BitmapImage Img)
+        public Owner(string FirstName, string LastName, string SurName, int NumberRoom, BitmapImage Img, bool IsOwner)
         { 
             this.FirstName = FirstName;
             this.LastName = LastName;
             this.SurName = SurName;
             this.NumberRoom = NumberRoom;
             this.Img = Img;
+            this.IsOwner = IsOwner;
         }
     }
 }
