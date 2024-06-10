@@ -40,5 +40,13 @@ namespace Word_Тепляков
             saveFileDialog.ShowDialog();
             if(saveFileDialog.FileName != "") OwnerContext.Report(saveFileDialog.FileName);
         }
+
+        private void ReportPDF(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "PDF (*.pdf)|*.pdf";
+            sfd.ShowDialog();
+            if(sfd.FileName != "") OwnerContext.ReportPDF(sfd.FileName);
+        }
     }
 }
